@@ -7,10 +7,14 @@ const Status = () => {
     const { getSession, logout } = useContext(AccountContext);
 
     useEffect(() => {
-        getSession().then((session) => {
-            console.log("Session:", session);
-            setStatus(true);
-        });
+        getSession()
+            .then((session) => {
+                console.log("Session:", session);
+                setStatus(true);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
     return (

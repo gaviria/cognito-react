@@ -4,7 +4,7 @@ import { AccountContext } from "./Account";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    console.log(AccountContext);
+
     const { authenticate } = useContext(AccountContext);
 
     const onSubmit = (event) => {
