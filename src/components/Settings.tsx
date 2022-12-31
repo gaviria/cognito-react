@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "./Account";
+import ChangePassword from "./ChangePassword";
 
 const Settings = () => {
     const { getSession } = useContext(AccountContext);
@@ -20,6 +21,7 @@ const Settings = () => {
             {loggedin && (
                 <>
                     <h2>Setting</h2>
+                    <ChangePassword />
                 </>
             )}
         </div>
