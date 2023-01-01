@@ -5,6 +5,7 @@ import { Account } from "./components/Account";
 import Status from "./components/Status";
 import Settings from "./components/Settings";
 import ForgotPassword from "./components/ForgotPassword";
+import Attributes from "./components/Attributes";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Login />
                 <ForgotPassword />
                 <Settings />
+                <Attributes />
             </Account>
         </div>
     );
