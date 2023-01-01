@@ -1,5 +1,5 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "./Account";
 
 const Attributes = () => {

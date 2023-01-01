@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "./Account";
 import ChangePassword from "./ChangePassword";
 import ChangeEmail from "./ChangeEmail";
+import DeleteUser from "./DeleteUser";
+import Attributes from "./Attributes";
 
 const Settings = () => {
     const { getSession } = useContext(AccountContext);
@@ -24,6 +26,8 @@ const Settings = () => {
                     <h2>Setting</h2>
                     <ChangePassword />
                     <ChangeEmail />
+                    <DeleteUser />
+                    <Attributes />
                 </>
             )}
         </div>
