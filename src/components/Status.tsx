@@ -6,14 +6,16 @@ const Status = () => {
     const [status, setStatus] = useState(false);
     const { getSession, logout } = useContext(AccountContext);
 
+    //Pasar un status desde el context o un redux o cambiar este componente y no decir "please Login"
+    //y colocarlo dentro de un componente ya login como Setting.tsx para obtener la session de getSession.
     useEffect(() => {
         getSession()
             .then((session) => {
                 console.log("Session:", session);
                 setStatus(true);
             })
-            .catch((err) => {
-                console.log(err);
+            .catch(() => {
+                console.log("You must logIn");
             });
     }, []);
 

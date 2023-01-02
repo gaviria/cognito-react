@@ -14,8 +14,8 @@ const Settings = () => {
             .then(() => {
                 setLoggedIn(true);
             })
-            .catch((err) => {
-                console.log(err);
+            .catch(() => {
+                console.log("You must logIn to get User Options");
             });
     }, []);
 

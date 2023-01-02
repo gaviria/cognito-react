@@ -54,28 +54,37 @@ const ForgotPassword = () => {
     return (
         <div>
             {stage === 1 && (
-                <form onSubmit={onSendCode}>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="text"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <button type="submit">Send Verification Code</button>
-                </form>
+                <>
+                    <h2>Forgot Pasword</h2>
+                    <form onSubmit={onSendCode}>
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            type="text"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <button type="submit">Send Verification Code</button>
+                    </form>
+                </>
             )}
             {stage === 2 && (
                 <form onSubmit={onResetPassword}>
+                    <label htmlFor="code">Email:</label>
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     <label htmlFor="code">Code:</label>
                     <input
                         type="text"
                         onChange={(e) => setCode(e.target.value)}
                     />
-                    <label htmlFor="newpassword">New Password:</label>
+                    <label htmlFor="newPassword">New Password:</label>
                     <input
                         type="text"
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
-                    <label htmlFor="confirmnewpassword">
+                    <label htmlFor="confirmNewPassword">
                         Confirm New Password:
                     </label>
                     <input
