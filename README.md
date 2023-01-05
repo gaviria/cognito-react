@@ -21,9 +21,6 @@ Later you have to modify your .env file adding
 VITE_COGNITO_USER_POOL_ID="your#user#pool#id"
 VITE_COGNITO_CLIENT_ID="your#client#id"
 ```
-## Documentation
-
-[Documentation](https://linktodocumentation)
 
 
 ## Features
