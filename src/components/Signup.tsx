@@ -1,15 +1,18 @@
 import { CognitoUser } from "amazon-cognito-identity-js";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import UserPool from "../UserPool";
+import style from "../assets/css/styles.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [step, setStep] = useState(1); //step 1 is Signup and 2 is code verification
     const [codeVerification, setCodeVerification] = useState("");
+    const navigate = useNavigate();
 
     //React.ChangeEvent<HTMLInputElement>
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         UserPool.signUp(email, password, [], [], (err, data) => {
             if (err) {
@@ -20,7 +23,7 @@ const Signup = () => {
         });
     };
 
-    const onConfirmCode = (e: React.FormEvent<HTMLFormElement>) => {
+    const onConfirmCode = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const user = new CognitoUser({
@@ -33,38 +36,42 @@ const Signup = () => {
                 console.log(err);
             }
             console.log(result);
+            navigate("/");
         });
     };
 
     return (
-        <div>
+        <div className={style.container}>
             {step === 1 && (
-                <form onSubmit={onSubmit}>
-                    <h2>Signup</h2>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                            placeholder="Email"
-                        />
-                        <label htmlFor="password"></label>
-                        <input
-                            type="text"
-                            value={password}
-                            onChange={(event) =>
-                                setPassword(event?.target.value)
-                            }
-                            placeholder="Password"
-                        />
-                    </div>
+                <form onSubmit={onSubmit} className={style.signup_form}>
+                    <legend className={style.legend_text}>Sign Up</legend>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        id="email"
+                        type="text"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder="Email"
+                    />
+                    <label htmlFor="password">Password</label>
+                    <input
+                        id="password"
+                        type="text"
+                        value={password}
+                        onChange={(event) => setPassword(event?.target.value)}
+                        placeholder="Password"
+                    />
                     <button type="submit">Signup</button>
                 </form>
             )}
             {step === 2 && (
-                <form onSubmit={onConfirmCode}>
-                    <h2>Code verification</h2>
+                <form
+                    onSubmit={onConfirmCode}
+                    className={style.code_verification_form}
+                >
+                    <legend className={style.legend_text}>
+                        Verify Account
+                    </legend>
                     <label htmlFor="codeVerification">Email:</label>
                     <input
                         type="text"

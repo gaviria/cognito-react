@@ -1,6 +1,7 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "./Account";
+import style from "../assets/css/styles.module.css";
 
 const Attributes = () => {
     const [plan, setPlan] = useState("");
@@ -35,8 +36,8 @@ const Attributes = () => {
 
     return (
         <div>
-            <h1>Update your Plan</h1>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className={style.attributes_form}>
+                <legend className={style.legend_text}>Update your Plan</legend>
                 <input
                     type="text"
                     value={plan}

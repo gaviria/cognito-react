@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "./Account";
-import ChangePassword from "./ChangePassword";
-import ChangeEmail from "./ChangeEmail";
-import DeleteUser from "./DeleteUser";
-import Attributes from "./Attributes";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import style from "../assets/css/styles.module.css";
 
 const Settings = () => {
-    const { getSession } = useContext(AccountContext);
+    const { getSession, logout } = useContext(AccountContext);
     const [loggedin, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getSession()
@@ -16,6 +15,7 @@ const Settings = () => {
             })
             .catch(() => {
                 console.log("You must logIn to get User Options");
+                navigate("/");
             });
     }, []);
 
@@ -23,11 +23,42 @@ const Settings = () => {
         <div>
             {loggedin && (
                 <>
-                    <h2>Setting</h2>
-                    <ChangePassword />
-                    <ChangeEmail />
-                    <DeleteUser />
-                    <Attributes />
+                    <nav className={style.nav_settings}>
+                        <NavLink
+                            to="changepassword"
+                            className={({ isActive }) =>
+                                isActive ? style.isactive_link : undefined
+                            }
+                        >
+                            Change Password
+                        </NavLink>
+                        <NavLink
+                            to="changeemail"
+                            className={({ isActive }) =>
+                                isActive ? style.isactive_link : undefined
+                            }
+                        >
+                            Change Email
+                        </NavLink>
+                        <NavLink
+                            to="deleteuser"
+                            className={({ isActive }) =>
+                                isActive ? style.isactive_link : undefined
+                            }
+                        >
+                            Delete Account
+                        </NavLink>
+                        <NavLink
+                            to="attributes"
+                            className={({ isActive }) =>
+                                isActive ? style.isactive_link : undefined
+                            }
+                        >
+                            Update Attributes
+                        </NavLink>
+                        <button onClick={logout}>Logout</button>
+                    </nav>
+                    <Outlet />
                 </>
             )}
         </div>

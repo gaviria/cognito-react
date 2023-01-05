@@ -1,10 +1,16 @@
 import { createContext } from "react";
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 import UserPool from "../UserPool";
+import { useNavigate } from "react-router-dom";
 
 const AccountContext = createContext();
+type props = {
+    children: JSX.Element | JSX.Element[];
+};
 
-const Account = (props) => {
+const Account = (props: props) => {
+    const navigate = useNavigate();
+
     const getSession = async () => {
         return await new Promise((resolve, reject) => {
             const user = UserPool.getCurrentUser();
@@ -69,8 +75,13 @@ const Account = (props) => {
 
     const logout = () => {
         const user = UserPool.getCurrentUser();
-        if (user) {
+
+        try {
             user.signOut();
+            console.log("Successful Logout");
+            navigate("/");
+        } catch (err) {
+            console.log("error Logout", err);
         }
     };
     return (

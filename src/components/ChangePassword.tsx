@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useContext } from "react";
 import { AccountContext } from "./Account";
+import style from "../assets/css/styles.module.css";
 
 const ChangePassword = () => {
     const [password, setPassword] = useState("");
@@ -8,7 +9,7 @@ const ChangePassword = () => {
 
     const { getSession } = useContext(AccountContext);
 
-    const onSubmit = (event) => {
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         getSession().then(({ user }) => {
@@ -23,8 +24,9 @@ const ChangePassword = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
+        <div className={style.container}>
+            <form onSubmit={onSubmit} className={style.user_password_form}>
+                <legend className={style.legend_text}>Change Password</legend>
                 <label htmlFor="password">Current Password</label>
                 <input
                     type="text"

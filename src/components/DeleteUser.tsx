@@ -16,7 +16,12 @@ const DeleteUser = () => {
         });
     };
 
-    return <button onClick={onDeleteUser}>Delete User</button>;
+    return (
+        <>
+            <h1>Are you sure?</h1>
+            <button onClick={onDeleteUser}>Delete User</button>
+        </>
+    );
 };
 
 export default DeleteUser;

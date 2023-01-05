@@ -1,0 +1,43 @@
+.container {
+    width: 400px;
+}
+
+.login_form,
+.signup_form,
+.code_verification_form,
+.password_form,
+.user_password_form,
+.email_user_form,
+.attributes_form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.legend_text {
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.login_options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup_link,
+.remember_password_link {
+    display: inline-block;
+}
+
+.isactive_link {
+    display: none;
+}
+
+.nav_settings {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 62px;
+    justify-content: center;
+    align-items: center;
+}

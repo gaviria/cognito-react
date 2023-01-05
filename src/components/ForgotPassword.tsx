@@ -1,6 +1,8 @@
 import UserPool from "../UserPool";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { CognitoUser } from "amazon-cognito-identity-js";
+import style from "../assets/css/styles.module.css";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
     const [stage, setStage] = useState(1); // 1 = email stage, 2 = code stage
@@ -8,6 +10,7 @@ const ForgotPassword = () => {
     const [code, setCode] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const navigate = useNavigate();
 
     const getUser = () => {
         return new CognitoUser({
@@ -16,7 +19,7 @@ const ForgotPassword = () => {
         });
     };
 
-    const onSendCode = (event) => {
+    const onSendCode = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         getUser().forgotPassword({
@@ -33,7 +36,7 @@ const ForgotPassword = () => {
         });
     };
 
-    const onResetPassword = (event) => {
+    const onResetPassword = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (newPassword !== confirmNewPassword) {
@@ -44,6 +47,7 @@ const ForgotPassword = () => {
         getUser().confirmPassword(code, newPassword, {
             onSuccess: (data) => {
                 console.log("onSuccess:", data);
+                navigate("/");
             },
             onFailure: (err) => {
                 console.error("onFailure:", err);
@@ -52,35 +56,50 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div>
+        <div className={style.container}>
             {stage === 1 && (
-                <>
-                    <h2>Forgot Pasword</h2>
-                    <form onSubmit={onSendCode}>
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            type="text"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <button type="submit">Send Verification Code</button>
-                    </form>
-                </>
-            )}
-            {stage === 2 && (
-                <form onSubmit={onResetPassword}>
-                    <label htmlFor="code">Email:</label>
+                <form onSubmit={onSendCode} className={style.password_form}>
+                    <legend className={style.legend_text}>
+                        Forgot Pasword
+                    </legend>
+                    <label htmlFor="email">Email:</label>
                     <input
+                        id="email"
                         type="text"
-                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
+                    <button type="submit">Send Verification Code</button>
+                </form>
+            )}
+            {stage === 2 && (
+                <form
+                    onSubmit={onResetPassword}
+                    className={style.password_form}
+                >
+                    <legend className={style.legend_text}>
+                        Change Password
+                    </legend>
+                    {!email && (
+                        <>
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                id="email"
+                                type="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </>
+                    )}
+
                     <label htmlFor="code">Code:</label>
                     <input
+                        id="code"
                         type="text"
                         onChange={(e) => setCode(e.target.value)}
                     />
                     <label htmlFor="newPassword">New Password:</label>
                     <input
+                        id="newPassword"
                         type="text"
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -88,6 +107,7 @@ const ForgotPassword = () => {
                         Confirm New Password:
                     </label>
                     <input
+                        id="confirmNewPassword"
                         type="text"
                         onChange={(e) => setConfirmNewPassword(e.target.value)}
                     />
