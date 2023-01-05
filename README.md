@@ -1,7 +1,7 @@
 # AWS Cognito with React
 
 Is a Basic Login project with React and aws Cognito (amazon-cognito-identity-js).
-If you need it, go ahead!!. I will be updating the code everi month.
+If you need it, go ahead!!. I will be updating the code every month.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
